@@ -2,13 +2,16 @@ import Form from "@/app/ui/invoices/edit-form";
 import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
 import { fetchCustomers, fetchInvoiceById } from "@/app/lib/data";
 import { notFound } from "next/navigation";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 
-export async function generateMetaData({
-  params
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
+export async function generateMetaData(
+  {
+    params
+  }: {
+    params: { id: string };
+  },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const { id } = params;
   return {
     title: `Edit Invoice #${id}`
