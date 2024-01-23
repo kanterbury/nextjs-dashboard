@@ -4,6 +4,8 @@ import { fetchCustomers, fetchInvoiceById } from "@/app/lib/data";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { updateInvoice } from "@/app/lib/actions";
+import Link from "next/link";
+import { Button } from "@/app/ui/button";
 
 export const metadata: Metadata = {
   title: "Edit Invoice"
@@ -32,10 +34,22 @@ export default async function Page({ params }: { params: { id: string } }) {
         ]}
       />
       <Form
+        id="edit-invoice"
         invoice={invoice}
         customers={customers}
         action={updateInvoiceWithId}
       />
+      <div className="mt-6 flex justify-end gap-4">
+        <Link
+          href="/dashboard/invoices"
+          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+        >
+          Cancel
+        </Link>
+        <Button type="submit" form="edit-invoice">
+          Edit Invoice
+        </Button>
+      </div>
     </main>
   );
 }

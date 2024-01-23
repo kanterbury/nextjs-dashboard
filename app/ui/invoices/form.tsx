@@ -8,16 +8,15 @@ import {
   CurrencyDollarIcon,
   UserCircleIcon
 } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { Button } from "../button";
-import { FormEvent } from "react";
 import { useFormState } from "react-dom";
 
 export default function Form({
+  id,
   customers,
   action,
   invoice
 }: {
+  id?: string;
   customers: CustomerField[];
   action: (prevState: State, formData: FormData) => Promise<any>;
   invoice?: InvoiceForm;
@@ -25,7 +24,7 @@ export default function Form({
   const initialState = { message: null, error: {} };
   const [state, dispatch] = useFormState(action, initialState);
   return (
-    <form action={dispatch}>
+    <form action={dispatch} id={id}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
@@ -145,15 +144,6 @@ export default function Form({
               </p>
             ))}
         </div>
-      </div>
-      <div className="mt-6 flex justify-end gap-4">
-        <Link
-          href="/dashboard/invoices"
-          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
-        >
-          Cancel
-        </Link>
-        <Button type="submit">Edit Invoice</Button>
       </div>
     </form>
   );
